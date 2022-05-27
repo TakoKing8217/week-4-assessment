@@ -1,5 +1,5 @@
-let friends = []
-
+let friends = [];
+const axios = require("axios");
 module.exports = {
   getCompliment: (req, res) => {
     const compliments = [
@@ -47,10 +47,10 @@ module.exports = {
   },
 
   addFriends: (req, res) => {
-    friends.push(req.body.name)
-    res.status(200).send(friends)
+    console.log(req.body.name);
+    friends.push(req.body.name);
+    res.status(200).send(friends);
   },
-
 
   putNames: (req, res) => {
     friends = [
@@ -65,6 +65,31 @@ module.exports = {
   },
 
   changeNames: (req, res) => {
+    console.log("hit3");
+    for (let i = 0; i < friends.length; i++) {
+      if (friends[i] === req.body.originalName) {
+        req.body.ogName = req.body.newName;
+      }
+    }
     res.status(200).send();
+  },
+
+  deleteName: (req, res) => {
+    console.log("Hit 87");
+    friends = friends.pop();
+    res.status(200).send(friends);
+  },
+  randomList: (req, res) => {
+    let randomPlanet = Math.floor(Math.random() * 10);
+    let address = "https://swapi.dev/api/planets/" + +randomPlanet + "/";
+    axios
+      .get(address)
+      .then((res) => {
+        console.log(res.data);
+        var result = res.data;
+      })
+      .catch();
+    console.log("Worked45");
+    res.status(200).send(result);
   },
 };

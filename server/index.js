@@ -13,12 +13,16 @@ const {
   getVadersHeight,
   changeNames,
   addFriends,
+  deleteName,
+  randomList,
 } = require("./controller");
 
 app.get("/api/compliment", getCompliment);
 app.get("/api/misfortune", getBadNews);
 app.get("/api/darthvader", getVadersHeight);
-app.get("/api/changeNames", changeNames);
-app.get("/api/addNames", addFriends);
+app.put("/api/changeNames", changeNames);
+app.post("/addNames", addFriends);
+app.get("/names", deleteName);
+app.get("/api/list", randomList);
 
 app.listen(4000, () => console.log("Server running on 4000"));
